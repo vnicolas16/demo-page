@@ -1,1 +1,30 @@
-Test
+trigger:    
+- main    #branch
+
+resources:  
+- repo: self    #self repo
+
+variables:
+  tag: '$(Build.BuikdId)' #identifier of build, # of build/version
+  imageName: 'demo-page'
+
+stages:
+- stage: Build
+  displayName: Build image
+  jobs:   #Executions
+  - job: Build
+    displayName: Build
+    pool:  #creates a VM behind the scenes to run the pipelines
+      vmImage: ubuntu-latest
+    
+    steps:
+    - task: Docker@2  #like a Docker image v2
+      displayName: Build an image
+      inputs:
+        repository: $(imageName)  #taken from varibale above "demo-page"
+        command: build
+        Dockerfile: '**/Dockerfile' #double ** so it searches anywhere
+        tags: $(tag) #Taked form variable tag from above
+
+      #With this task we are building an image using 
+      #a plugin, it;s the same as "Docker build -t xxx"
