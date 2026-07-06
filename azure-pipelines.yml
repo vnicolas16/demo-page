@@ -5,7 +5,7 @@ resources:
 - repo: self    #self repo
 
 variables:
-  tag: '$(Build.BuikdId)' #identifier of build, # of build/version
+  tag: '$(Build.BuildId)' #identifier of build, # of build/version
   imageName: 'demo-page'
 
 stages:
