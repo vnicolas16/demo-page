@@ -29,9 +29,10 @@ stages:
       inputs:
         repository: ${{ parameters.imageName}}  #taken from parameters
         command: build
-        Dockerfile: '**/Dockerfile' #double ** so it searches anywhere
+        dockerfile: '**/Dockerfile' #double ** so it searches anywhere
         tags: ${{ parameters.tag}} #Taked form parameters
         arguments: '--build-arg VERSION=$(appVersion)'
+        containerRegistry: registryConnection
 
     - task: Docker@2
       displayName: Push to ACR
