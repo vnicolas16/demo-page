@@ -14,8 +14,7 @@ stages:
   jobs:   #Executions
   - job: Build
     displayName: Build
-    pool:  #creates a VM behind the scenes to run the pipelines
-      vmImage: ubuntu-latest
+    pool:  local-agent
     
     steps:
     - task: Docker@2  #like a Docker image v2
