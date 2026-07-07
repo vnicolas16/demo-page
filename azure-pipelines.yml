@@ -5,8 +5,15 @@ resources:
 - repo: self    #self repo
 
 variables:
-  tag: '$(Build.BuildId)' #identifier of build, # of build/version
-  imageName: 'demo-page'
+- group: CICD
+- name: appVersion
+  value: $[variables.appVersion]
+
+parameters:
+  - name: tag
+    default: tag: '$(Build.BuildId)' #identifier of build, # of build/version
+  - name: imageName
+    default: 'demo-page'
 
 stages:
 - stage: Build
@@ -20,10 +27,11 @@ stages:
     - task: Docker@2  #like a Docker image v2
       displayName: Build an image
       inputs:
-        repository: $(imageName)  #taken from varibale above "demo-page"
+        repository: ${{ parameters.imageName}}  #taken from parameters
         command: build
         Dockerfile: '**/Dockerfile' #double ** so it searches anywhere
-        tags: $(tag) #Taked form variable tag from above
+        tags: ${{ parameters.tag}} #Taked form parameters
+        arguments: '--build-arg VERSION=$(appVersion)'
 
       #With this task we are building an image using 
       #a plugin, it;s the same as "Docker build -t xxx"
