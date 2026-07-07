@@ -33,5 +33,10 @@ stages:
         tags: ${{ parameters.tag}} #Taked form parameters
         arguments: '--build-arg VERSION=$(appVersion)'
 
-      #With this task we are building an image using 
-      #a plugin, it;s the same as "Docker build -t xxx"
+    - task: Docker@2
+      displayName: Push to ACR
+      inputs:
+        command: push
+        containerRegistry: registryConnection
+        repository: ${{ parameters.imageName}}
+        tags: ${{ parameters.tag }}
