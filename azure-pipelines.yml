@@ -9,7 +9,7 @@ variables:
 
 parameters:
   - name: tag
-    default: tag: '$(Build.BuildId)' #identifier of build, # of build/version
+    default: '$(Build.BuildId)' #identifier of build, # of build/version
   - name: imageName
     default: 'demo-page'
 
