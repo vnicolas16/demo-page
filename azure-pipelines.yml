@@ -43,7 +43,7 @@ stages:
   - job: Deploy
     displayName: Deploy
     dependsOn: Build
-    pull: local-agent
+    pool: local-agent
     steps:
       - task: AzureContainerApps@1
 
