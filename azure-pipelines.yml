@@ -29,7 +29,7 @@ stages:
         command: build
         dockerfile: '**/Dockerfile' #double ** so it searches anywhere
         tags: ${{ parameters.tag}} #Taked form parameters
-        arguments: '--build-arg VERSION=$(appVersion)'
+        arguments: '--build-arg VERSION=${{ parameters.tag }}'
         containerRegistry: registryConnection
 
     - task: Docker@2
